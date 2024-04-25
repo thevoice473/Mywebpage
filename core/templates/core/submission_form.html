@@ -1,9 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
 <html>
 <head>
     <title>Submission Form</title>
+    <style>
+       .car-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .car-item {
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        .car-item:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+        img {
+            width: 200px;
+            height: auto;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #cart {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
-    <h1>Submission Form</h1>
-    <!-- Add your form here if needed -->
+    <h1>Select Cars </h1>
+    <div class="car-container">
+        <div class="car-item">
+            <img src="{% static 'images/car1.jpeg' %}" alt="Ferrari SP-8">
+            <h3>Car Model 1</h3>
+            <p>Ferrari SP-8.</p>
+            <p>Price: $306,450</p>
+            <li>
+                <button onclick="addToCart('Ferrari SP-8')">Add to Cart</button>
+            </li>
+            
+        </div>
+        <div class="car-item">
+            <img src="{% static 'images/car2.jpg' %}" alt="Maserati GranTurismo">
+            <h3>Car Model 2</h3>
+            <p>Maserati GranTurismo.</p>
+            <p>Price: $169,195</p>
+            <li>
+                <button onclick="addToCart('Maserati GranTurismo')">Add to Cart</button>
+            </li>
+            
+            
+            
+        </div>
+        <div class="car-item">
+            <img src="{% static 'images/car3.jpg' %}" alt="Lamborghini Revuelto">
+            <h3>Car Model 3</h3>
+            <p>Lamborghini Revuelto.</p>
+            <p>Price: $608,358</p>
+            <li>
+                <button onclick="addToCart('Lamborghini Revuelto')">Add to Cart</button>
+            </li>
+            
+        </div>
+    </div>
+    <div>
+        <h2>Cart:</h2>
+        <ul id="cart">
+            <!-- Cart items will be dynamically added here -->
+        </ul>
+    </div>
+
+    <script>
+        function addToCart(item) {
+            var cart = document.getElementById("cart");
+            var cartItems = cart.getElementsByTagName("li");
+            var itemIndex = -1;
+            // Check if the item is already in the cart
+            for (var i = 0; i < cartItems.length; i++) {
+                if (cartItems[i].textContent.trim() === item) {
+                    itemIndex = i;
+                    break;
+                }
+            }
+            // If the item is in the cart, remove it; otherwise, add it
+            if (itemIndex !== -1) {
+                cartItems[itemIndex].remove();
+            } else {
+                var newItem = document.createElement("li");
+                newItem.textContent = item;
+                cart.appendChild(newItem);
+            }
+        }
+    </script>
 </body>
 </html>
