@@ -21,7 +21,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com', 'thevoice473-1N0tdi$thyme2.') {
+                    docker.withRegistry('https://hub.docker.com', 'thevoice473') {
                         docker.image('mywebapp:latest').push()
                     }
                 }
