@@ -15,12 +15,14 @@ pipeline {
         }
         stage('Run Tests') {
             steps {
-            echo 'Testing'
+                echo 'Testing'
             }
         }
         stage('Push Docker Image') {
             steps {
                 script {
+                    sh 'docker --version' // Debugging: Check Docker version
+                    sh 'docker info'       // Debugging: Check Docker info
                     docker.withRegistry('https://hub.docker.com', 'thevoice473') {
                         docker.image('mywebapp:latest').push()
                     }
